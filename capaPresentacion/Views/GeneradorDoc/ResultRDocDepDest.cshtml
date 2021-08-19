@@ -1,0 +1,79 @@
+﻿@model IEnumerable<capaEntidad.SP_REPORTE_DEPDEST_Result>
+
+@{
+    ViewBag.Title = "Resultado de Filtro de Documentos por Departamento de Destino";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Resultado de Filtro de Documentos por Departamento de Destino</h2>
+
+<p>
+    <a class="btn btn-success" href="@Url.Action("Create", "GeneradorDoc")">
+        <i class="glyphicon glyphicon-plus"></i> Nuevo Departamento
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            TIPO
+        </th>
+        <th>
+            SUBIDO POR
+        </th>
+        <th>
+            DEPARTAMENTO ORIGEN
+        </th>
+        <th>
+            DEPARTAMENTO DESTINO
+        </th>
+        <th>
+            NUMERACION
+        </th>
+        <th>
+            FECHA
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_DOCUMENTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UP_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEPARTAMENTO_ORIGEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEPARTAMENTO_DESTINO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUMERACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA)
+        </td>
+        <td>
+            <a class="btn btn-warning btn-sm" title="Editar" href="@Url.Action("Edit","GeneradorDoc", new { id= item.ID_DOCUMENTO})">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-info btn-sm" title="Detalles" href="@Url.Action("GetDocumento","GeneradorDoc", new { id= item.ID_DOCUMENTO})">
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+            <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete","GeneradorDoc", new { id= item.ID_DOCUMENTO})">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            
+        </td>
+    </tr>
+}
+
+</table>

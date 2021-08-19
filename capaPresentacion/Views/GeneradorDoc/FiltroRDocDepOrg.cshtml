@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Filtro de Documentos por Departamento de Origen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Filtro Para Reportes de Documentos por Departamento de Origen</h2>
+<form action="/GeneradorDoc/ResultRDocDepOrg" method="post">
+    <input type="text" name="deporg" placeholder="Ingrese el Nombre del Departamento" style="text-align:center" class="form-control" /> <br />
+    <input type="submit" value="FILTRAR" class="btn btn-success" />
+</form>

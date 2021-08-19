@@ -1,0 +1,49 @@
+﻿@model capaEntidad.DEPARTAMENTO
+
+@{
+    ViewBag.Title = "Detalles Departamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>DEPARTAMENTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_DEPARTAMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_DEPARTAMENTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_DPTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_DPTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SIGLAS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SIGLAS)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit","Departamentos", new { id= Model.ID_DEPARTAMENTO})">
+        <i class="glyphicon glyphicon-edit"></i>
+        Editar
+    </a>
+    <a class="btn btn-info btn-sm" href="@Url.Action("Details","Departamentos", new { id= Model.ID_DEPARTAMENTO})">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+        Regresar a la Lista
+    </a>
+</p>

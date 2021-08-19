@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PFINALModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DEPARTAMENTOS">
+          <Key>
+            <PropertyRef Name="ID_DEPARTAMENTO" />
+          </Key>
+          <Property Name="ID_DEPARTAMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_DPTO" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="SIGLAS" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DOCUMENTOS">
+          <Key>
+            <PropertyRef Name="ID_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_DOCUMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="UP_USUARIO" Type="int" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ORIGEN" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="DEPARTAMENTO_DESTINO" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="NUMERACION" Type="varchar" MaxLength="60" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOGUEO">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIO_L" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CORREO_L" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PASSWORD_L" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_U" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CEDULA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CORREO_U" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DEPARTAMENTO_U" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="CARGO" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__DOCUMENTO__DEPAR__571DF1D5' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__DOCUMENTO__DEPAR__571DF1D5" />-->
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__DOCUMENTO__DEPAR__5812160E' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__DOCUMENTO__DEPAR__5812160E" />-->
+        <Association Name="FK__DOCUMENTO__UP_US__5629CD9C">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="DOCUMENTOS" Type="Self.DOCUMENTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="DOCUMENTOS">
+              <PropertyRef Name="UP_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__USUARIOS__DEPART__534D60F1' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__USUARIOS__DEPART__534D60F1" />-->
+        <Function Name="SP_PRUEBA_SECU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_REPORTE_ALLDOCUMENTS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DOCUMENT" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_DEPARTAMENTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DEPARTAMENTO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_DEPDEST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DEPT" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_DEPORG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DEPT" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_DOCFOREMPLOYEES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USR" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_RANGOFECHA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="YEARSTART" Type="varchar" Mode="In" />
+          <Parameter Name="YEARFINISH" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_REPORTE_USUARIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="PFINALModelStoreContainer">
+          <EntitySet Name="DEPARTAMENTOS" EntityType="Self.DEPARTAMENTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOCUMENTOS" EntityType="Self.DOCUMENTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOGUEO" EntityType="Self.LOGUEO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DOCUMENTO__UP_US__5629CD9C" Association="Self.FK__DOCUMENTO__UP_US__5629CD9C">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="DOCUMENTOS" EntitySet="DOCUMENTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PFINALModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="ID_DEPARTAMENTO" />
+          </Key>
+          <Property Name="ID_DEPARTAMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_DPTO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SIGLAS" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOGUEO">
+          <Key>
+            <PropertyRef Name="ID_LOGIN" />
+          </Key>
+          <Property Name="ID_LOGIN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIO_L" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO_L" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD_L" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_U" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CEDULA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CORREO_U" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DEPARTAMENTO_U" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CARGO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DOCUMENTOS" Relationship="PFINALModel.FK__DOCUMENTO__UP_US__5629CD9C" FromRole="USUARIO" ToRole="DOCUMENTO" />
+        </EntityType>
+        <EntityContainer Name="PFINALEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DEPARTAMENTOS" EntityType="Self.DEPARTAMENTO" />
+          <EntitySet Name="LOGUEOs" EntityType="Self.LOGUEO" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIO" />
+          <EntitySet Name="DOCUMENTOS" EntityType="PFINALModel.DOCUMENTO" />
+          <AssociationSet Name="FK__DOCUMENTO__UP_US__5629CD9C" Association="PFINALModel.FK__DOCUMENTO__UP_US__5629CD9C">
+            <End Role="USUARIO" EntitySet="USUARIOS" />
+            <End Role="DOCUMENTO" EntitySet="DOCUMENTOS" />
+          </AssociationSet>
+          <FunctionImport Name="SP_PRUEBA_SECU" />
+          <FunctionImport Name="SP_REPORTE_ALLDOCUMENTS" ReturnType="Collection(PFINALModel.SP_REPORTE_ALLDOCUMENTS_Result)">
+            <Parameter Name="DOCUMENT" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_DEPARTAMENTOS" ReturnType="Collection(PFINALModel.SP_REPORTE_DEPARTAMENTOS_Result)">
+            <Parameter Name="DEPARTAMENTO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_DEPDEST" ReturnType="Collection(PFINALModel.SP_REPORTE_DEPDEST_Result)">
+            <Parameter Name="DEPT" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_DEPORG" ReturnType="Collection(PFINALModel.SP_REPORTE_DEPORG_Result)">
+            <Parameter Name="DEPT" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_DOCFOREMPLOYEES" ReturnType="Collection(PFINALModel.SP_REPORTE_DOCFOREMPLOYEES_Result)">
+            <Parameter Name="USR" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_RANGOFECHA" ReturnType="Collection(PFINALModel.SP_REPORTE_RANGOFECHA_Result)">
+            <Parameter Name="YEARSTART" Mode="In" Type="String" />
+            <Parameter Name="YEARFINISH" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPORTE_USUARIOS" ReturnType="Collection(PFINALModel.SP_REPORTE_USUARIOS_Result)">
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="DOCUMENTO">
+          <Key>
+            <PropertyRef Name="ID_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_DOCUMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="UP_USUARIO" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTAMENTO_ORIGEN" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO_DESTINO" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="USUARIO" Relationship="PFINALModel.FK__DOCUMENTO__UP_US__5629CD9C" FromRole="DOCUMENTO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK__DOCUMENTO__UP_US__5629CD9C">
+          <End Type="PFINALModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="PFINALModel.DOCUMENTO" Role="DOCUMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="DOCUMENTO">
+              <PropertyRef Name="UP_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_REPORTE_ALLDOCUMENTS_Result">
+          <Property Type="Int32" Name="ID_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="UP_USUARIO" Nullable="false" />
+          <Property Type="String" Name="DEPARTAMENTO_ORIGEN" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="DEPARTAMENTO_DESTINO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="NUMERACION" Nullable="true" MaxLength="60" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_DEPARTAMENTOS_Result">
+          <Property Type="Int32" Name="ID_DEPARTAMENTO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_DPTO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="SIGLAS" Nullable="false" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_DEPDEST_Result">
+          <Property Type="Int32" Name="ID_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="UP_USUARIO" Nullable="false" />
+          <Property Type="String" Name="DEPARTAMENTO_ORIGEN" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="DEPARTAMENTO_DESTINO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="NUMERACION" Nullable="true" MaxLength="60" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_DEPORG_Result">
+          <Property Type="Int32" Name="ID_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="UP_USUARIO" Nullable="false" />
+          <Property Type="String" Name="DEPARTAMENTO_ORIGEN" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="DEPARTAMENTO_DESTINO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="NUMERACION" Nullable="true" MaxLength="60" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_DOCFOREMPLOYEES_Result">
+          <Property Type="Int32" Name="UP_USUARIO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_U" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="APELLIDO" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="CEDULA" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="ID_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="NUMERACION" Nullable="true" MaxLength="60" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_RANGOFECHA_Result">
+          <Property Type="Int32" Name="ID_DOCUMENTO" Nullable="false" />
+          <Property Type="String" Name="TIPO" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="UP_USUARIO" Nullable="false" />
+          <Property Type="String" Name="DEPARTAMENTO_ORIGEN" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="DEPARTAMENTO_DESTINO" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="NUMERACION" Nullable="true" MaxLength="60" />
+          <Property Type="DateTime" Name="FECHA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_REPORTE_USUARIOS_Result">
+          <Property Type="Int32" Name="ID_USUARIO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_U" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="APELLIDO" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="CEDULA" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TELEFONO" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="CORREO_U" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DEPARTAMENTO_U" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="CARGO" Nullable="false" MaxLength="40" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PFINALModelStoreContainer" CdmEntityContainer="PFINALEntities">
+          <EntitySetMapping Name="DEPARTAMENTOS">
+            <EntityTypeMapping TypeName="PFINALModel.DEPARTAMENTO">
+              <MappingFragment StoreEntitySet="DEPARTAMENTOS">
+                <ScalarProperty Name="ID_DEPARTAMENTO" ColumnName="ID_DEPARTAMENTO" />
+                <ScalarProperty Name="NOMBRE_DPTO" ColumnName="NOMBRE_DPTO" />
+                <ScalarProperty Name="SIGLAS" ColumnName="SIGLAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGUEOs">
+            <EntityTypeMapping TypeName="PFINALModel.LOGUEO">
+              <MappingFragment StoreEntitySet="LOGUEO">
+                <ScalarProperty Name="ID_LOGIN" ColumnName="ID_LOGIN" />
+                <ScalarProperty Name="USUARIO_L" ColumnName="USUARIO_L" />
+                <ScalarProperty Name="CORREO_L" ColumnName="CORREO_L" />
+                <ScalarProperty Name="PASSWORD_L" ColumnName="PASSWORD_L" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="PFINALModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRE_U" ColumnName="NOMBRE_U" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO_U" ColumnName="CORREO_U" />
+                <ScalarProperty Name="DEPARTAMENTO_U" ColumnName="DEPARTAMENTO_U" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOCUMENTOS">
+            <EntityTypeMapping TypeName="PFINALModel.DOCUMENTO">
+              <MappingFragment StoreEntitySet="DOCUMENTOS">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="DEPARTAMENTO_DESTINO" ColumnName="DEPARTAMENTO_DESTINO" />
+                <ScalarProperty Name="DEPARTAMENTO_ORIGEN" ColumnName="DEPARTAMENTO_ORIGEN" />
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_PRUEBA_SECU" FunctionName="PFINALModel.Store.SP_PRUEBA_SECU" />
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_ALLDOCUMENTS" FunctionName="PFINALModel.Store.SP_REPORTE_ALLDOCUMENTS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_ALLDOCUMENTS_Result">
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="DEPARTAMENTO_ORIGEN" ColumnName="DEPARTAMENTO_ORIGEN" />
+                <ScalarProperty Name="DEPARTAMENTO_DESTINO" ColumnName="DEPARTAMENTO_DESTINO" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_DEPARTAMENTOS" FunctionName="PFINALModel.Store.SP_REPORTE_DEPARTAMENTOS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_DEPARTAMENTOS_Result">
+                <ScalarProperty Name="ID_DEPARTAMENTO" ColumnName="ID_DEPARTAMENTO" />
+                <ScalarProperty Name="NOMBRE_DPTO" ColumnName="NOMBRE_DPTO" />
+                <ScalarProperty Name="SIGLAS" ColumnName="SIGLAS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_DEPDEST" FunctionName="PFINALModel.Store.SP_REPORTE_DEPDEST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_DEPDEST_Result">
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="DEPARTAMENTO_ORIGEN" ColumnName="DEPARTAMENTO_ORIGEN" />
+                <ScalarProperty Name="DEPARTAMENTO_DESTINO" ColumnName="DEPARTAMENTO_DESTINO" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_DEPORG" FunctionName="PFINALModel.Store.SP_REPORTE_DEPORG">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_DEPORG_Result">
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="DEPARTAMENTO_ORIGEN" ColumnName="DEPARTAMENTO_ORIGEN" />
+                <ScalarProperty Name="DEPARTAMENTO_DESTINO" ColumnName="DEPARTAMENTO_DESTINO" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_DOCFOREMPLOYEES" FunctionName="PFINALModel.Store.SP_REPORTE_DOCFOREMPLOYEES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_DOCFOREMPLOYEES_Result">
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="NOMBRE_U" ColumnName="NOMBRE_U" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_RANGOFECHA" FunctionName="PFINALModel.Store.SP_REPORTE_RANGOFECHA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_RANGOFECHA_Result">
+                <ScalarProperty Name="ID_DOCUMENTO" ColumnName="ID_DOCUMENTO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="UP_USUARIO" ColumnName="UP_USUARIO" />
+                <ScalarProperty Name="DEPARTAMENTO_ORIGEN" ColumnName="DEPARTAMENTO_ORIGEN" />
+                <ScalarProperty Name="DEPARTAMENTO_DESTINO" ColumnName="DEPARTAMENTO_DESTINO" />
+                <ScalarProperty Name="NUMERACION" ColumnName="NUMERACION" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_REPORTE_USUARIOS" FunctionName="PFINALModel.Store.SP_REPORTE_USUARIOS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PFINALModel.SP_REPORTE_USUARIOS_Result">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="NOMBRE_U" ColumnName="NOMBRE_U" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO_U" ColumnName="CORREO_U" />
+                <ScalarProperty Name="DEPARTAMENTO_U" ColumnName="DEPARTAMENTO_U" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

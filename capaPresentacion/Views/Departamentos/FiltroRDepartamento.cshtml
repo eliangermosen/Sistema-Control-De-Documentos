@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Reporte Por Departamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Filtro Para Reportes Por Departamentos</h2>
+<form action="/Departamentos/ResultRDepartamento" method="post">
+    <input type="text" name="depart" placeholder="Ingrese el Nombre del Departamento" style="text-align:center" class="form-control" /><br />
+    <input type="submit" value="FILTRAR" class="btn btn-success" />
+</form>
+

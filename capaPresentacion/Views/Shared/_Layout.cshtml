@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Control de Documentos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Control de Documentos", "Index", "Iniciop", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Departamentos", "Details", "Departamentos")</li>
+                    <li>@Html.ActionLink("Usuarios", "Details", "Usuarios")</li>
+                    <li>@Html.ActionLink("Documentos", "Details", "GeneradorDoc")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Reportes <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">@Html.ActionLink("De Usuarios", "FiltroRUsuario", "Usuarios")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("De Departamentos", "FiltroRDepartamento", "Departamentos")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li id="sub-dropdown" class="dropdown"><a href="#">@Html.ActionLink("De Documentos", "FiltroRAllDoc", "GeneradorDoc")<span class="glyphicon glyphicon-chevron-right"></span></a>
+                            <li><a href="#">@Html.ActionLink("Todos los Documentos", "FiltroRAllDoc", "GeneradorDoc")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Generados por empleado", "FiltroRGEmpDoc", "GeneradorDoc")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Por Departamento Origen", "FiltroRDocDepOrg", "GeneradorDoc")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Por Departamento Destino", "FiltroRDocDepDest", "GeneradorDoc")</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">@Html.ActionLink("Por Rango Fecha", "FiltroRDocRangFec", "GeneradorDoc")</a></li>
+                            @*<li role="separator" class="divider"></li>*@
+                        </ul>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="/HomeLogin/Logout">Cerrar Sesion</a></li>
+                    }
+                </ul>
+                    @*</li>*@
+                
+                @*</ul>
+                </ul>*@
+                @*@if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href="/HomeLogin/Logout">Cerrar Sesion</a></li>
+                }*@
+                @*</li>*@
+                @*<li>@Html.ActionLink("Home", "Index", "Iniciop")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                @*</ul>*@
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer style="text-align:center">
+            <p>&copy; @DateTime.Now.Year | Elian Germosen | 2019-8498</p>
+            @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Content/login.css" rel="stylesheet" />
+<div class="container" action="/HomeLogin/Login" method="post">
+
+    <form id="signup" action="/HomeLogin/Login" method="post">
+
+        <div class="header">
+
+            <h3>CONTROL DE DOCUMENTOS </h3>
+
+            <p>INICIAR SESION</p>
+
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="inputs">
+            <div>
+                <input type="email" name="correo" placeholder="e-mail" autofocus />
+            </div>
+            <div>
+                <input type="password" name="contrasena" placeholder="Password" />
+            </div>
+            <div class="form-group" id="submit">
+                <button class="btn btn-success">INICIAR SESION</button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

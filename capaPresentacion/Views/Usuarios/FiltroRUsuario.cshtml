@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Reporte Por Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Filtro Para Reportes Por Usuarios</h2>
+<form action="/Usuarios/ResultRUsuario" method="post">
+    <input type="text" name="nombre" placeholder="Ingrese el Nombre del Usuario" style="text-align:center" class="form-control" /><br /> 
+    <input type="submit" value="FILTRAR" class="btn btn-success"/>
+</form>

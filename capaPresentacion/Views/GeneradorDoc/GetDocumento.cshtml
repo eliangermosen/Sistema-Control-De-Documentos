@@ -1,0 +1,81 @@
+﻿@model capaEntidad.DOCUMENTO
+
+@{
+    ViewBag.Title = "Detalles Documento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>DOCUMENTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_DOCUMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_DOCUMENTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UP_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UP_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEPARTAMENTO_ORIGEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO_ORIGEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEPARTAMENTO_DESTINO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO_DESTINO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NUMERACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-warning btn-sm" href="@Url.Action("Edit","GeneradorDoc", new { id= Model.ID_DOCUMENTO})">
+        <i class="glyphicon glyphicon-edit"></i>
+        Editar
+    </a>
+    <a class="btn btn-info btn-sm" href="@Url.Action("Details","GeneradorDoc", new { id= Model.ID_DOCUMENTO})">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+        Regresar a la Lista
+    </a>
+</p>

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Filtro de Documentos por Rango de Fecha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Filtro Para Reportes de Documentos por Rango de Fecha</h2>
+<form action="/GeneradorDoc/ResultRDocRangFec" method="post">
+    <input type="date" name="fecStart" placeholder="Ingrese la Fecha Inicial" style="text-align:center" class="form-control" /> <br />
+    <input type="date" name="fecFinish" placeholder="Ingrese la Fecha Limite" style="text-align:center" class="form-control" /> <br />
+    <input type="submit" value="FILTRAR" class="btn btn-success" />
+</form>
+

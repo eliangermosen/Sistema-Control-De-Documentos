@@ -1,0 +1,85 @@
+﻿@model IEnumerable<capaEntidad.SP_REPORTE_USUARIOS_Result>
+
+@{
+    ViewBag.Title = "Resultado de Filtro por Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Resultado de Filtro por Usuario</h2>
+
+<p>
+    <a class="btn btn-success" href="@Url.Action("Create", "Usuarios")">
+        <i class="glyphicon glyphicon-plus"></i> Nuevo Usuario
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            NOMBRE
+        </th>
+        <th>
+            APELLIDO
+        </th>
+        <th>
+            CEDULA
+        </th>
+        <th>
+            TELEFONO
+        </th>
+        <th>
+            CORREO
+        </th>
+        <th>
+            DEPARTAMENTO_U
+        </th>
+        <th>
+            CARGO
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CEDULA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TELEFONO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CORREO_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEPARTAMENTO_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CARGO)
+        </td>
+        <td>
+            <a class="btn btn-warning btn-sm" title="Editar" href="@Url.Action("Edit","Usuarios", new { id= item.ID_USUARIO})">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-info btn-sm" title="Detalles" href="@Url.Action("GetUsuario","Usuarios", new { id= item.ID_USUARIO})">
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+            <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete","Usuarios", new { id= item.ID_USUARIO})">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            
+        </td>
+    </tr>
+}
+
+</table>

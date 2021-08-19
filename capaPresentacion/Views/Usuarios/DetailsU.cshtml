@@ -1,0 +1,76 @@
+﻿@model IEnumerable<capaEntidad.USUARIO>
+
+@{
+    ViewBag.Title = "DetailsU";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetailsU</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_USUARIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE_U)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APELLIDO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CEDULA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TELEFONO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CORREO_U)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DEPARTAMENTO_U)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CARGO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_USUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CEDULA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TELEFONO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CORREO_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DEPARTAMENTO_U)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CARGO)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditU", new { id = item.ID_USUARIO }) |
+            @Html.ActionLink("Details", "EditU", new { id = item.ID_USUARIO }) |
+            @Html.ActionLink("Delete", "DeleteU", new { id = item.ID_USUARIO })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<capaEntidad.SP_REPORTE_DEPARTAMENTOS_Result>
+
+@{
+    ViewBag.Title = "Resultado de Filtro por Departamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Resultado de Filtro por Departamento</h2>
+
+<p>
+    <a class="btn btn-success" href="@Url.Action("Create", "Departamentos")">
+        <i class="glyphicon glyphicon-plus"></i> Nuevo Departamento
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            NOMBRE DEPARTAMENTO
+        </th>
+        <th>
+            SIGLAS
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_DEPARTAMENTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE_DPTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SIGLAS)
+        </td>
+        <td>
+            <a class="btn btn-warning btn-sm" title="Editar" href="@Url.Action("Edit","Departamentos", new { id= item.ID_DEPARTAMENTO})">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a class="btn btn-info btn-sm" title="Detalles" href="@Url.Action("GetDepartamento","Departamentos", new { id= item.ID_DEPARTAMENTO})">
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+            <a class="btn btn-danger btn-sm" title="Eliminar" href="@Url.Action("Delete","Departamentos", new { id= item.ID_DEPARTAMENTO})">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            
+        </td>
+    </tr>
+}
+
+</table>

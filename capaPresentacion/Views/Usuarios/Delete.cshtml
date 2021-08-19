@@ -1,0 +1,92 @@
+﻿@model capaEntidad.USUARIO
+
+@{
+    ViewBag.Title = "Elimar Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminacion</h2>
+
+<h4>USUARIO</h4>
+<div>
+    <h4>Esta seguro que desea eliminarlo?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_USUARIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_U)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_U)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CEDULA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CEDULA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEFONO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFONO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CORREO_U)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CORREO_U)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEPARTAMENTO_U)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEPARTAMENTO_U)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CARGO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CARGO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Eliminar" class="btn btn-danger" />
+    <a class="btn btn-info btn-sm" href="@Url.Action("Details","Usuarios", new { id= Model.ID_USUARIO})">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+        Regresar a la Lista
+    </a>
+</div>
+    }
+</div>

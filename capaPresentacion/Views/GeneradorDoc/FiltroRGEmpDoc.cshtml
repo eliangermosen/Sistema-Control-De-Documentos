@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Filtro de Documentos Generados por Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Filtro Para Reportes de Documentos Generados por Empleado</h2>
+<form action="/GeneradorDoc/ResultRGEmpDoc" method="post">
+    <input type="number" name="gedoc" placeholder="Ingrese el ID del Empleado" style="text-align:center" class="form-control" /> <br />
+    <input type="submit" value="FILTRAR" class="btn btn-success" />
+</form>
